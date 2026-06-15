@@ -33,16 +33,36 @@ export function AuthProvider({ children }: React.PropsWithChildren) {
 		const res = await fetch(
 			`${BASE_URL}/users?login=${encodeURIComponent(login)}&password=${encodeURIComponent(password)}`,
 		);
-		const data = await res.json();
 
-		if (data.length) {
-			setUser(data[0]);
-			localStorage.setItem('user', JSON.stringify(data[0]));
-
-			return true;
+		if (!res.ok) {
+			console.error('Auth request failed', res.status, res.statusText);
+			setUser(null);
+			localStorage.removeItem('user');
+			return false;
 		}
 
-		return false;
+		const data = await res.json();
+
+		if (!Array.isArray(data) || data.length === 0) {
+			setUser(null);
+			localStorage.removeItem('user');
+			return false;
+		}
+
+		const userData = data.find(
+			(userRecord) => userRecord.login === login && userRecord.password === password,
+		);
+
+		if (!userData || typeof userData.role !== 'string') {
+			setUser(null);
+			localStorage.removeItem('user');
+			return false;
+		}
+
+		setUser(userData);
+		localStorage.setItem('user', JSON.stringify(userData));
+
+		return true;
 	};
 
 	const logout = () => {
