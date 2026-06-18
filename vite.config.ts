@@ -15,7 +15,7 @@ export default defineConfig({
 			'@components': path.resolve(__dirname, './src/components'),
 		},
 	},
-	base: '/react-kinomemory', // Для корректной работы GitHub Pages, еще нужно добавить строчку  "postbuild": "cp dist/index.html dist/404.html", в package.json
+	base: '/kinomemory', // Для корректной работы GitHub Pages, еще нужно добавить строчку  "postbuild": "cp dist/index.html dist/404.html", в package.json
 
 	//   server: {
 	//     open: true, // Проект будет сам открываться в браузере при запуске

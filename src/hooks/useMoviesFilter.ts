@@ -61,7 +61,7 @@ export function useMoviesFilter(
 				(film) => film.genre.toLowerCase() === genre.toLowerCase(),
 			);
 		}
-		console.log(searchQuery);
+		// console.log(searchQuery);
 		if (searchQuery !== '') {
 			copyArray = copyArray.filter((film) =>
 				film.title.toLowerCase().includes(searchQuery.toLowerCase()),

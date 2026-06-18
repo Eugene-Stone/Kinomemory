@@ -27,7 +27,7 @@ export default function LoginForm() {
 	// console.log(login);
 
 	async function onSubmit(data: FormLoginType) {
-		console.log(data);
+		// console.log(data);
 		setStatus('loading');
 
 		const success = await login(data.login, data.password);
